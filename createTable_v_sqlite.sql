@@ -24,8 +24,9 @@ CREATE TABLE IF NOT EXISTS `Result` (
   `time` INTEGER NOT NULL ,
   `feedback` VARCHAR(1000) NULL ,
   `currentGenerated` FLOAT NULL ,
-  `score` MEDIUMTEXT NULL ,
+  `score` INTEGER NULL ,
   `nameUser` VARCHAR(45) NULL ,
   `dateBegin` DATE NULL ,
   `dateEnd` DATE NULL ,
-  PRIMARY KEY (`idResult`)  );
+  PRIMARY KEY (`idResult`),
+  FOREIGN KEY(`idMachine`) REFERENCES Machine(idMachine)  );
