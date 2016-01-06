@@ -47,7 +47,7 @@ def getTop(limit):
     Get the top results from the database
     """
     results=query_db("SELECT * FROM result order by score desc limit {0}".format(limit))
-    return resultsToJSON(results)
+    return tableToJSON(results, "Result")
 
 
 def insert(table, fields=(), values=()):
@@ -154,71 +154,34 @@ def updateRow(tableName, id):
             return "ERROR"
         return "SUCCESS"
 
-def resultsToJSON(results):
-    """
-    Transform into JSON the data selected from the result's table.
-    """
+
+def getColumn(tableName):
+    names = []
+    query = "PRAGMA table_info(" + tableName + ")"
+    for item in query_db(query):
+        names.append(item[1])
+    return names
+
+def tableToJSON(results, tableName):
     if results:
+        namesColumn = getColumn(tableName)
         data = []
         for result in results:
-            data.append({
-                "idMachine": result[1],
-                "time": result[2],
-                "feedback": result[3],
-                "currentGenerated": result[4],
-                "score": result[5],
-                "nameUser": result[6],
-                "dateBegin": result[7],
-                "dateEnd": result[8]
-            })
-        return json.dumps(data)
-    else:
-        return ""
-
-@app.route("/results", methods=['GET'])
-def getResults():
-    """
-    Get the all th results in the database
-    """
-    query = "SELECT * FROM Result"
-    if request.method == 'GET':
-        data = request.args
-        if data:
-            query_comp = " WHERE "
-            for key in data:
-                query_comp += "{0} LIKE {1}".format(key, data[key])
-                query_comp += " AND "
-            results = query_db(re.sub(" AND $", ";", query + query_comp))
-            return resultsToJSON(results)
-
-        results = query_db(query)
-        return resultsToJSON(results)
-
-
-def machinesToJSON(results):
-    """
-    Transform in JSON machine data from the query
-    """
-    if results:
-        data = []
-        for result in results:
-            data.append({
-                "idMachine": result[0],
-                "name": result[1],
-                "location": result[2],
-                "type": result[3]
-            })
+            dico ={}
+            for i in xrange(len(namesColumn)):
+                dico[namesColumn[i]]=result[i]
+            data.append(dico)
         return json.dumps(data)
     else:
         return ""
 
 
-@app.route("/machines", methods=['GET'])
-def getMachines():
+@app.route("/select/<tableName>", methods=['GET'])
+def select(tableName):
     """
     Get the machines from the database
     """
-    query = "SELECT * FROM Machine"
+    query = "SELECT * FROM " + tableName
     if request.method == 'GET':
         data = request.args
         if data:
@@ -227,9 +190,10 @@ def getMachines():
                 query_comp += "{0} LIKE {1}".format(key, data[key])
                 query_comp += " AND "
             results = query_db(re.sub(" AND $", ";", query + query_comp))
-            return machinesToJSON(results)
+            return tableToJSON(results, tableName)
 
         results = query_db(query)
-        return machinesToJSON(results)
+        return tableToJSON(results, tableName)
+
 if __name__ == "__main__":
     app.run()
