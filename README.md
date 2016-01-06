@@ -21,48 +21,55 @@ python server.py
 
 ####Available tables
 * machine
-| Name     | Type    |
-|----------|---------|
-| name     | Varchar |
-| location | varchar |
-| type     | varcher |
+    * idMachine (INTEGER)
+    * name (Varchar)
+    * location (Varchar)
+    * type (Varchar)
 * result
-
+    * idResult (INTEGER)
+    * idMachine (INTEGER)
+    * score (INTEGER)
+    * time (INTEGER)
+    * feedback (VARCHAR(1000))
+    * currentGenerated (INTEGER)
+    * nameUser (VARCHAR)
+    * dateBegin (DATE)
+    * dateEnd (DATE)
 ##Select
 
-To select a row from the database.
+    To select a row from the database.
 
 #####Example
-```
-localhost:5000/select/<nameTable>?<field=value>&...
-```
+    ```
+    localhost:5000/select/<nameTable>?<field=value>&...
+    ```
 
 #### Get the leaderboard
-```
-localhost:5000/top/<limit> 
-```
+    ```
+    localhost:5000/top/<limit> 
+    ```
 
 ##Insert
-To insert data into the database.
+    To insert data into the database.
 
 #####Example
-```
-localhost:5000/insert/<nameTable>?<field=value>&... 
-```
+    ```
+    localhost:5000/insert/<nameTable>?<field=value>&... 
+    ```
 
 ##Update
-To edit a row in the database.
+    To edit a row in the database.
 
 #####Example
-```
-localhost:5000/update/<nameTable>?<field=value>&...
-```
+    ```
+    localhost:5000/update/<nameTable>?<field=value>&...
+    ```
 
 ##Delete
-To delete a row
+    To delete a row
 
 #####Example
-```
-localhost:5000/delete/<nameTable>/<id>
-```
+    ```
+    localhost:5000/delete/<nameTable>/<id>
+    ```
 
