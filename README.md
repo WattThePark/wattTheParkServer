@@ -7,11 +7,13 @@
 
 ##Install Server
 Create database
-```sqlite3 nameDataBase
+```
+sqlite3 nameDataBase
 ```
 
 Create tables
-```.read createTable_v_sqlite.sql
+```
+.read createTable_v_sqlite.sql
 ```
 
 Launch server
