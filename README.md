@@ -35,6 +35,7 @@ python server.py
     * nameUser (VARCHAR)
     * dateBegin (DATE)
     * dateEnd (DATE)
+
 ##Select
 
     To select a row from the database.
