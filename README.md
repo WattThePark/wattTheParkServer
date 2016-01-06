@@ -21,6 +21,11 @@ python server.py
 
 ####Available tables
 * machine
+| Name     | Type    |
+|----------|---------|
+| name     | Varchar |
+| location | varchar |
+| type     | varcher |
 * result
 
 ##Select
