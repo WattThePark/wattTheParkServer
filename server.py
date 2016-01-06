@@ -1,6 +1,5 @@
 import sqlite3
-from flask import Flask, request, session, g, redirect, url_for, \
-    abort, render_template, flash
+from flask import Flask, request, g
 import json
 import re
 
@@ -46,7 +45,7 @@ def getTop(limit):
     """
     Get the top results from the database
     """
-    results=query_db("SELECT * FROM result order by score desc limit {0}".format(limit))
+    results = query_db("SELECT * FROM result order by score desc limit {0}".format(limit))
     return tableToJSON(results, "Result")
 
 
@@ -72,15 +71,16 @@ def update(table, id, fields=(), values=()):
     Update data in a database
     """
     # g.db is the database connection
+    idname = getColumn(table)[0]
     cur = g._db.cursor()
     middle = ""
     for i in xrange(len(fields)):
         middle += "{0} = \"{1}\",".format(fields[i], values[i])
     middle = re.sub(",$", "", middle)
-    query = 'UPDATE %s SET %s WHERE id%s=%s' % (
+    query = 'UPDATE %s SET %s WHERE %s=%s' % (
         table,
         middle,
-        table,
+        idname,
         id
     )
     cur.execute(query, ())
@@ -90,14 +90,14 @@ def update(table, id, fields=(), values=()):
     return id
 
 
-def delete(tableName,idname,id):
+def delete(tableName, id):
     """
     Delete a row in a database
     """
-    # g.db is the database connection
+    idname = getColumn(tableName)[0]
     cur = g._db.cursor()
-    query = "DELETE FROM {0} where id{1} LIKE {2}".format(
-        idname, tableName, id)
+    query = "DELETE FROM {0} where {1} LIKE {2}".format(
+        tableName, idname, id)
     cur.execute(query, ())
     g._db.commit()
     cur.close()
@@ -127,7 +127,8 @@ def insertData(tableName):
 def deleteRow(tableName, id):
     if request.method == 'GET':
         try:
-            delete(tableName,tableName,id)
+            delete(tableName,
+                   id)
             return "SUCCESS"
         except:
             return "ERROR"
@@ -162,14 +163,15 @@ def getColumn(tableName):
         names.append(item[1])
     return names
 
+
 def tableToJSON(results, tableName):
     if results:
         namesColumn = getColumn(tableName)
         data = []
         for result in results:
-            dico ={}
+            dico = {}
             for i in xrange(len(namesColumn)):
-                dico[namesColumn[i]]=result[i]
+                dico[namesColumn[i]] = result[i]
             data.append(dico)
         return json.dumps(data)
     else:
@@ -194,6 +196,7 @@ def select(tableName):
 
         results = query_db(query)
         return tableToJSON(results, tableName)
+
 
 if __name__ == "__main__":
     app.run()
