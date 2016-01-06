@@ -2,10 +2,12 @@ import sqlite3
 from flask import Flask, request, g
 import json
 import re
+import os
 
 # configuration
-DATABASE = 'wattThePark.db'
-DEBUG = True
+DATABASE = str(os.getenv('WTPS_DB', 'wattThePark.db'))
+DEBUG = bool(os.getenv('WTPS_DEBUG', True))
+PORT = int(os.getenv('WTPS_PORT', 3000))
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -119,6 +121,7 @@ def insertData(tableName):
             values.append(data[key])
         try:
             insert(tableName, fields, values)
+            return "OK"
         except:
             return "ERROR"
 
@@ -199,4 +202,4 @@ def select(tableName):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=PORT)
