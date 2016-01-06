@@ -45,6 +45,8 @@ To edit a row in the database.
 ```localhost:5000/update/<nameTable>?<field=value>&...```
 
 ##Delete
+To delete a row
+
 #####Example
-``` localhost:5000/delete/<nameTable>/<id>```
+```localhost:5000/delete/<nameTable>/<id>```
 
