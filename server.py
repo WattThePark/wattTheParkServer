@@ -53,7 +53,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 # configuration
 DATABASE = str(os.getenv('WTPS_DB', 'wattThePark.db'))
 DEBUG = bool(os.getenv('WTPS_DEBUG', True))
-PORT = int(os.getenv('WTPS_PORT', 3500))
+PORT = int(os.getenv('WTPS_PORT', 3000))
 
 app = Flask(__name__)
 app.config.from_object(__name__)
