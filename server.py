@@ -97,6 +97,14 @@ def getTop(limit):
     results = query_db("SELECT * FROM result order by score desc limit {0}".format(limit))
     return tableToJSON(results, "Result")
 
+@app.route("/top/<int:idMachine>/<int:limit>")
+@crossdomain("*")
+def getTopMachine(idMachine, limit):
+    """
+    Get the top results from the database
+    """
+    results = query_db("SELECT * FROM result WHERE idMachine={0} order by score desc limit {1}".format(idMachine, limit))
+    return tableToJSON(results, "Result")
 
 def insert(table, fields=(), values=()):
     """
