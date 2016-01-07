@@ -53,7 +53,7 @@ def crossdomain(origin=None, methods=None, headers=None,
 # configuration
 DATABASE = str(os.getenv('WTPS_DB', 'wattThePark.db'))
 DEBUG = bool(os.getenv('WTPS_DEBUG', True))
-PORT = int(os.getenv('WTPS_PORT', 3000))
+PORT = int(os.getenv('WTPS_PORT', 3500))
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -167,7 +167,7 @@ def insertData(tableName):
         for key in data:
             fields.append(key)
             values.append(data[key])
-        try:
+       	try:
             insert(tableName, fields, values)
             return "OK"
         except:
