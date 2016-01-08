@@ -1,0 +1,91 @@
+<html lang="en">
+    <head>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link rel="icon" href="images/fav.png">
+
+        <title>Les records</title>
+        <script src="./js/lib/jquery.js"></script>
+        <link rel="stylesheet" href="./js/lib/css/font-awesome.min.css">
+
+        <!-- Bootstrap core CSS -->
+        <link href="./js/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="css/accueil.css" rel="stylesheet">
+        <link href="css/records.css" rel="stylesheet">
+
+        <script type="text/javascript" src="js/timer.js"></script>
+        <script type="text/javascript" src="js/machine.js"></script>
+        <script src="./js/bootstrap/js/bootstrap.js" charset="utf-8"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+
+                <img src="images/logo.png" alt="HTML5 Icon" style="width:200px;height:200px;"/>
+                <h2 color="#41C632">Les records</h2>
+                <br/>
+                <br/>
+                <div class="responsive-table-line" style="margin:0px auto;max-width:700px;">
+                    <table class="table table-bordered table-condensed table-body-center CSSTableGenerator" id="tableRecord" >
+
+
+                    	<tr>
+                    		<td>Numéro</td>
+                            <td>Pseudo</td>
+                            <td>Score</td>
+                            <td>Message</td>
+                        </tr>
+
+
+
+                            <script>
+								(function() {
+								    $.ajax({
+								        url: 'http://' + ip + ':3000/top/10',
+								    })
+                                    .done(function(data) {
+                                        var obj = jQuery.parseJSON(data);
+                                        $.each(obj, function(i) {
+                                            var table = "<tr>";
+
+                                            table +="<td data-title='numero'>";
+                                            table += i+1 + "</td>";
+
+                                            table +="<td data-title='pseudo'>";
+                                            table += obj[i].nameUser + "</td>";
+
+                                            table +="<td data-title='score'>";
+                                            table += obj[i].score + "</td>";
+
+                                            table +="<td data-title='feedback'>";
+                                            table += obj[i].feedback + "</td>";
+
+
+                                            table += "</tr>";
+                                            $("#tableRecord").append(table);
+                                        });
+                                    })
+                                    .fail(function() {
+                                        alert("Ajax failed to fetch data")
+                                    })
+                                })();
+                            </script>
+                    </table>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>
+                <p><a class="btn btn-lg btn-success btnRetour" href="./accueil.html" role="button">Retour</a></p>
+            </div>
+    </body>
+
+</html>

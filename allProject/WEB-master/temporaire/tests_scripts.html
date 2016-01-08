@@ -1,0 +1,55 @@
+<html>
+<head>
+	<META charset="utf-8"/>
+	<link rel="stylesheet" href="style.css"/>
+
+</head>
+
+<body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript" src="scripts.js"></script>
+
+<h1>Page de test des scripts du serveur principal</h1>
+<div class="title">Meilleur résultat</div>
+<div>score: <span id="score"> 0 </span></div>
+<div>pseudo: <span id="pseudo"> anonyme </span></div>
+<div>feedback: <span id="fb">j'aime bien m'amuser tout en étant utile :) </span></div><br/>
+
+<div class="title">Top N des résultats</div>
+<div id="affich_topn">
+	<TABLE BORDER="1"> 
+	 <TR> 
+	 <TH> N° </TH> 
+	 <TH> Nom </TH> 
+	 <TH> Score </TH> 
+	 <TH> Feedback </TH> 
+	 <TH> Temps </TH> 
+	 <TH> Courant généré </TH> 
+	  </TR> 
+	  
+	</TABLE> 
+</div>
+<input id="t_topn" type="text" value="5"/>
+<input id="b_topn" type="button" value="afficher"/><br/>
+
+<div class="title">Dernier feedback</div>
+<div>pseudo: <span id="pseudo_lfb">  </span></div>
+<div>feedback: <span id="fb_lfb"> </span></div>
+<div>score: <span id="score_lfb"> </span></div>
+<div>time: <span id="score_lfb"> </span></div>
+
+<div class="title">insertion dans la base</div>
+
+	<div>idMachine: <input id="t_id_in" type="text" value="1"></div>
+	<div>pseudo: <input id="t_pseudo_in" type="text"  value="user"></div>
+	<div>feedback: <input id="t_fb_in" type="text"  value="mon fb"></div>
+	<div>score: <input id="t_score_in" type="text"  value="557"></div>
+	<div>time: <input id="t_time_in" type="text"  value="100"></div>
+	<div>date: <input id="t_date_in" type="text"  value="2015-7-12"></div>
+	<div>courant généré: <input id="t_courant_in" type="text"  value="10"></div>
+	<div><input id="b_send_in" type="button" value="envoyer"></div>
+	<div><span id="t_aff_in" ></div>
+
+</body>
+</html>

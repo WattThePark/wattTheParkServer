@@ -1,0 +1,25 @@
+{
+  "name": "WattTheBoard",
+  "version": "1.0.0",
+  "description": "Describe WattTheBoard here",
+  "private": true,
+  "scripts": {
+    "build": "nwb build",
+    "clean": "nwb clean",
+    "start": "nwb serve",
+    "test": "nwb test"
+  },
+  "dependencies": {
+    "react": "0.14.x",
+    "react-dom": "0.14.x"
+  },
+  "devDependencies": {
+    "jquery": "^2.1.4",
+    "material-ui": "^0.14.1",
+    "nwb": "0.7.x",
+    "react-tap-event-plugin": "^0.2.1"
+  },
+  "author": "",
+  "license": "MIT",
+  "repository": ""
+}
